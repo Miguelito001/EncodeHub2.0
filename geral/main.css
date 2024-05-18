@@ -1,0 +1,91 @@
+body{
+    margin: 0;
+    background-color: #333333;
+    }
+    .container{
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      align-items: center;
+      height: 100vh;
+      box-sizing: border-box;
+      padding: 20px;
+      gap: 20px;
+      position: relative;
+    }
+    
+    .large-area{
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #aaaaaa;
+      background: #444444;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      resize: none;
+      font-family: monospace;
+      transition: background 0.25s, color 0.25s;
+    }
+    .large-area:hover,
+    .large-area:focus{
+      background: #4a4a4a;
+      color: #eeeeee;
+    }
+    .controls__button{
+      padding: 8px 14px;
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background: #009578;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .controls__button--central{
+      position: fixed;
+      padding: 8px 14px;
+      width: 100%;
+      top: 30px; /* Ajuste conforme necessário */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+    }
+    .controls__button--github{
+      position: fixed;
+      padding: 8px 14px;
+      width: 100%;
+      bottom: 20px; /* Ajuste conforme necessário */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+    }
+    
+    .controls__button:active{
+      background: #00705a;
+    }
+    .large-area--input{
+      height: 99%;
+      display: flex;
+      width: 100%;
+    }
+
+    .large-area--output {
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .large-area--output.expanded {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+    }
+    .inputs{
+      height: 100%;
+      width: 100%;
+    }

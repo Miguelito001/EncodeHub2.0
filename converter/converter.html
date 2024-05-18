@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>Formatter/Converter</title>
+    <script src="converter.js" defer></script>
+    <script src="../geral/funcoes.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="../download.jpg">
+    <link rel="stylesheet" href="../geral/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <textarea class = "large-area large-area--input" placeholder="Digite seu JSON aqui!..."></textarea>
+      <div class="controls">
+        <a href="../index.html">
+          <button type="button" class="controls__button controls__button--central">Central</button>
+        </a>
+        <label for="format" class="controls__button controls__button--format">Entrada</label>
+        <select class="controls__button controls__button--select">
+          <option value="json">JSON</option>
+          <option value="yaml">YAML Formatter</option>
+          <option value="xml">XML</option>
+        </select>
+        <label for="format" class="controls__button controls__button--format">Saida</label>
+        <select class="controls__button controls__button--convert">
+            <option value="json">JSON</option>
+            <option value="yaml">YAML Formatter</option>
+            <option value="xml">XML</option>
+        </select>
+        <a href="https://github.com/Miguelito001/EncodeHub" target="_blank">
+          <button type="button" class="controls__button controls__button--github">GitHub</button>
+        </a>
+      </div>
+      <textarea class = "large-area large-area--output" placeholder="Seu JSON irá aparecer aqui!..."></textarea>
+    </div>
+</body>
+</html>
