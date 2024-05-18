@@ -1,6 +1,6 @@
 # Ferramentas de Desenvolvimento
 
-Bem-vindo ao repositório do site **Ferramentas de Desenvolvimento**! Este site oferece várias ferramentas úteis para desenvolvedores, como um formatador de JSON, conversor de Base64 e conversor de Binário.
+Bem-vindo ao repositório do site **Ferramentas de Desenvolvimento**! Este site oferece várias ferramentas úteis para desenvolvedores, como formatar ou converter JSON, XML,YAML, conversor de Base64 e conversor de Binário.
 
 ## Índice
 
@@ -33,16 +33,16 @@ O site **Ferramentas de Desenvolvimento** foi criado para fornecer funcionalidad
 /
 ├── index.html                # Página inicial
 ├── main.css                # Arquivo de estilo CSS da pagina inicial
-├── json/
-│   ├── json.html   # Ferramenta JSON Formatter
-│   ├── json.js     # Script para JSON Formatter
+├── converter/
+│   ├── converter.html   # Ferramenta Formatter/Converter
+│   ├── converter.js     # Script para Formatter/Converter
 ├── base64/
 │   ├── base64.html # Ferramenta Base64 Converter
 │   ├── base64.js   # Script para Base64 Converter
 ├── binario/
-│   ├── binary.html # Ferramenta Binário Converter
-│   ├── binary.js   # Script para Binário Converter
-├── binario/
+│   ├── binario.html # Ferramenta Binário Converter
+│   ├── binario.js   # Script para Binário Converter
+├── geral/
 │   ├── funcoes.js  # Script padrâo pra todas paginas
 │   ├── main.css    # Arquivo de estilos CSS pra todas as paginas
 └── README.md                 # Documentação do projeto
@@ -52,7 +52,7 @@ O site **Ferramentas de Desenvolvimento** foi criado para fornecer funcionalidad
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/Miguelito001/EncodeHub.git
+   git clone https://github.com/Miguelito001/EncodeHub2.0.git
 2. **Navegue até o diretório do projeto:**
    ```bash
    cd EncodeHub
@@ -61,10 +61,8 @@ O site **Ferramentas de Desenvolvimento** foi criado para fornecer funcionalidad
 
 Aqui estão algumas sugestões de melhorias e novas funcionalidades que podem ser adicionadas ao site:
 
-- **Validação de JSON:** Adicionar mensagens de erro mais detalhadas ao formatar JSON inválido.
 - **Tema Escuro/Claro:** Adicionar uma opção para alternar entre tema escuro e claro.
 - **Suporte a Arquivos:** Permitir upload de arquivos para conversão em vez de apenas texto inserido manualmente.
-- **Outras Ferramentas:** Adicionar mais ferramentas úteis, como um conversor de XML, um codificador/decodificador URL, etc.
 
 ## Contribuições
 
