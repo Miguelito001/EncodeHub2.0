@@ -1,46 +1,26 @@
-// Cria um nome único para o localStorage
-var uniqueLocalStorageName = 'binario_inputText';
+var BinaryConverterModule = (function () {
+    // Variável privada única para o localStorage
+    var uniqueLocalStorageName = 'binario_inputText';
 
-document.addEventListener('DOMContentLoaded', function() {
+    // Seletores dos elementos DOM
     var inputTextArea = document.querySelector('.large-area--input');
     var outputTextArea = document.querySelector('.large-area--output');
     var formatButton = document.querySelector('.controls__button--format');
     var menorButton = document.querySelector('.controls__button--menor');
 
-    // Carrega o texto salvo do localStorage quando a página é carregada
-    if (localStorage.getItem(uniqueLocalStorageName)) {
-        inputTextArea.value = localStorage.getItem(uniqueLocalStorageName);
+    // Função privada para carregar dados do localStorage
+    function loadFromLocalStorage() {
+        if (localStorage.getItem(uniqueLocalStorageName)) {
+            inputTextArea.value = localStorage.getItem(uniqueLocalStorageName);
+        }
     }
 
-    formatButton.addEventListener('click', function() {
-        var inputText = inputTextArea.value;
-        var binaryText = textToBinary(inputText);
-        outputTextArea.value = binaryText;
-        // Salva o texto no localStorage
-        localStorage.setItem(uniqueLocalStorageName, inputText);
-    });
-
-    menorButton.addEventListener('click', function() {
-        var inputText = inputTextArea.value;
-        if (isValidBinary(inputText)) {
-            var normalText = binaryToText(inputText);
-            outputTextArea.value = normalText;
-            // Salva o texto no localStorage
-            localStorage.setItem(uniqueLocalStorageName, normalText);
-        } else {
-            alert('Entrada inválida! Certifique-se de que a entrada é um binário válido.');
-        }
-    });
-
-    // Salva o texto no localStorage sempre que ele é modificado
-    inputTextArea.addEventListener('input', function() {
-        localStorage.setItem(uniqueLocalStorageName, inputTextArea.value);
-    });
-
+    // Função privada para validar se a entrada é um binário válido
     function isValidBinary(binary) {
         return /^[01]*$/.test(binary) && binary.length % 8 === 0;
     }
 
+    // Função privada para converter texto em binário
     function textToBinary(text) {
         var binary = '';
         for (var i = 0; i < text.length; i++) {
@@ -50,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return binary;
     }
 
+    // Função privada para converter binário em texto
     function binaryToText(binary) {
         var text = '';
         for (var i = 0; i < binary.length; i += 8) {
@@ -58,4 +39,42 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return text;
     }
+
+    // Função privada para configurar os eventos
+    function initEventListeners() {
+        formatButton.addEventListener('click', function () {
+            var inputText = inputTextArea.value;
+            var binaryText = textToBinary(inputText);
+            outputTextArea.value = binaryText;
+            localStorage.setItem(uniqueLocalStorageName, inputText); // Salva o texto no localStorage
+        });
+
+        menorButton.addEventListener('click', function () {
+            var inputText = inputTextArea.value;
+            if (isValidBinary(inputText)) {
+                var normalText = binaryToText(inputText);
+                outputTextArea.value = normalText;
+                localStorage.setItem(uniqueLocalStorageName, normalText); // Salva o texto no localStorage
+            } else {
+                alert('Entrada inválida! Certifique-se de que a entrada é um binário válido.');
+            }
+        });
+
+        inputTextArea.addEventListener('input', function () {
+            localStorage.setItem(uniqueLocalStorageName, inputTextArea.value);
+        });
+    }
+
+    // Funções reveladas (públicas)
+    return {
+        init: function () {
+            loadFromLocalStorage();
+            initEventListeners();
+        }
+    };
+})();
+
+// Inicializa o módulo quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function () {
+    BinaryConverterModule.init();
 });

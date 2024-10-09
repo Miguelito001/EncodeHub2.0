@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Formatter/Converter</title>
+    <!-- Certifique-se de que os caminhos estão corretos -->
     <script src="converter.js" defer></script>
     <script src="../geral/funcoes.js" defer></script>
     <link rel="icon" type="image/x-icon" href="../download.jpg">
@@ -12,28 +13,35 @@
   </head>
   <body>
     <div class="container">
-      <textarea class = "large-area large-area--input" spellcheck="false" placeholder="Digite seu JSON aqui!..."></textarea>
+      <textarea class="large-area large-area--input" spellcheck="false" placeholder="Digite seu conteúdo aqui!..."></textarea>
+      
       <div class="controls">
         <a href="../index.html">
           <button type="button" class="controls__button controls__button--central">Central</button>
         </a>
-        <label for="format" class="controls__button controls__button--format">Entrada</label>
-        <select class="controls__button controls__button--select">
+
+        <!-- Ajuste do `for` e `id` -->
+        <label for="input-format" class="controls__button controls__button--format">Entrada</label>
+        <select id="input-format" class="controls__button controls__button--select">
           <option value="json">JSON</option>
           <option value="yaml">YAML Formatter</option>
           <option value="xml">XML</option>
         </select>
-        <label for="format" class="controls__button controls__button--format">Saida</label>
-        <select class="controls__button controls__button--convert">
-            <option value="json">JSON</option>
-            <option value="yaml">YAML Formatter</option>
-            <option value="xml">XML</option>
+
+        <label for="output-format" class="controls__button controls__button--format">Saída</label>
+        <select id="output-format" class="controls__button controls__button--convert">
+          <option value="json">JSON</option>
+          <option value="yaml">YAML Formatter</option>
+          <option value="xml">XML</option>
         </select>
-        <a href="https://github.com/Miguelito001/EncodeHub" target="_blank">
+
+        <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
           <button type="button" class="controls__button controls__button--github">GitHub</button>
         </a>
       </div>
-      <textarea class = "large-area large-area--output" spellcheck="false" placeholder="Seu JSON irá aparecer aqui!..."></textarea>
+
+      <!-- Ajuste do placeholder -->
+      <textarea class="large-area large-area--output" spellcheck="false" placeholder="Sua saída aparecerá aqui!..."></textarea>
     </div>
-</body>
+  </body>
 </html>
