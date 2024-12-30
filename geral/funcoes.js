@@ -1,14 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const outputArea = document.querySelector(".large-area--output");
-    let isExpanded = false;
-  
-    outputArea.addEventListener("dblclick", function() {
+document.addEventListener("DOMContentLoaded", function () {
+  const outputContainer = document.querySelector(".large-area--output-container");
+  const outputArea = document.querySelector(".large-area--output");
+  const toggleExpandBtn = document.getElementById("toggle-expand-btn");
+  let isExpanded = false;
+
+  // Função para alternar expansão
+  toggleExpandBtn.addEventListener("click", function () {
       if (!isExpanded) {
-        outputArea.classList.add('expanded');
-        isExpanded = true;
+          outputContainer.classList.add("expanded");
+          outputArea.classList.add("expanded");
+          isExpanded = true;
+          toggleExpandBtn.textContent = "❌"; // Alterar o ícone para indicar "Reduzir"
       } else {
-        outputArea.classList.remove('expanded');
-        isExpanded = false;
+          outputContainer.classList.remove("expanded");
+          outputArea.classList.remove("expanded");
+          isExpanded = false;
+          toggleExpandBtn.textContent = "🔳"; // Alterar o ícone para indicar "Expandir"
       }
-    });
   });
+});
