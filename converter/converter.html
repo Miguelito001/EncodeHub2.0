@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <title>Formatter/Converter</title>
-    <!-- Certifique-se de que os caminhos estão corretos -->
-    <script src="converter.js" defer></script>
-    <script src="../geral/funcoes.js" defer></script>
-    <link rel="icon" type="image/x-icon" href="../download.jpg">
-    <link rel="stylesheet" href="../geral/geral.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <textarea class="large-area large-area--input" spellcheck="false" placeholder="Digite seu conteúdo aqui!..."></textarea>
-      
-      <div class="controls">
-        <a href="../index.html">
-          <button type="button" class="controls__button controls__button--central">Central</button>
-        </a>
 
-        <!-- Ajuste do `for` e `id` -->
-        <label for="input-format" class="controls__button controls__button--format">Entrada</label>
-        <select id="input-format" class="controls__button controls__button--select">
-          <option value="json">JSON</option>
-          <option value="yaml">YAML Formatter</option>
-          <option value="xml">XML</option>
-        </select>
+<head>
+  <meta charset="utf-8" />
+  <title>Formatter/Converter</title>
+  <!-- Certifique-se de que os caminhos estão corretos -->
+  <script src="converter.js" defer></script>
+  <script src="../geral/funcoes.js" defer></script>
+  <link rel="icon" type="image/x-icon" href="../download.jpg">
+  <link rel="stylesheet" href="../geral/geral.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
 
-        <label for="output-format" class="controls__button controls__button--format">Saída</label>
-        <select id="output-format" class="controls__button controls__button--convert">
-          <option value="json">JSON</option>
-          <option value="yaml">YAML Formatter</option>
-          <option value="xml">XML</option>
-        </select>
+<body>
+  <div class="container">
+    <textarea class="large-area large-area--input" spellcheck="false"
+      placeholder="Digite seu conteúdo aqui!..."></textarea>
 
-        <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
-          <button type="button" class="controls__button controls__button--github">GitHub</button>
-        </a>
-      </div>
+    <div class="controls">
+      <a href="../index.html">
+        <button type="button" class="controls__button controls__button--central">Central</button>
+      </a>
 
-      <!-- Ajuste do placeholder -->
-      <textarea class="large-area large-area--output" spellcheck="false" placeholder="Sua saída aparecerá aqui!..."></textarea>
+      <!-- Ajuste do `for` e `id` -->
+      <label for="input-format" class="controls__button controls__button--format">Entrada</label>
+      <select id="input-format" class="controls__button controls__button--select">
+        <option value="json">JSON</option>
+        <option value="yaml">YAML Formatter</option>
+        <option value="xml">XML</option>
+      </select>
+
+      <label for="output-format" class="controls__button controls__button--format">Saída</label>
+      <select id="output-format" class="controls__button controls__button--convert">
+        <option value="json">JSON</option>
+        <option value="yaml">YAML Formatter</option>
+        <option value="xml">XML</option>
+      </select>
+
+      <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
+        <button type="button" class="controls__button controls__button--github">GitHub</button>
+      </a>
     </div>
-  </body>
+
+    <div class="large-area--output-container">
+      <textarea class="large-area--output" spellcheck="false" placeholder="Sua saída aparecerá aqui!..."></textarea>
+      <button id="toggle-expand-btn" class="toggle-expand-btn">🔳</button>
+    </div>
+
+
+  </div>
+</body>
+
 </html>
