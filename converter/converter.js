@@ -1,28 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
     const ConverterModule = (function () {
         const x2js = new X2JS();
-        
+
         const selectors = {
             inputArea: document.querySelector('.large-area--input'),
             outputArea: document.querySelector('.large-area--output'),
-            inputTypeSelect: document.querySelector('.controls__button--select'),
-            outputTypeSelect: document.querySelector('.controls__button--convert')
+            inputTypeSelect: document.querySelector('#input-format'),
+            outputTypeSelect: document.querySelector('#output-format')
         };
 
         const conversionFunctions = {
             'json': {
                 'json': (input) => JSON.stringify(JSON.parse(input), null, 2),
-                'xml': (input) => jsonToXml(JSON.parse(input)),
-                'yaml': (input) => jsyaml.dump(JSON.parse(input)),
+                'xml': (input) => jsonToXml(input),
+                'yaml': (input) => jsonToYaml(input),
             },
             'xml': {
-                'json': (input) => JSON.stringify(xmlToJson(input), null, 2),
+                'json': (input) => xmlToJson(input),
                 'xml': (input) => formatXml(input),
-                'yaml': (input) => jsyaml.dump(xmlToJson(input)),
+                'yaml': (input) => jsonToYaml(xmlToJson(input)),
             },
             'yaml': {
                 'json': (input) => yamlToJson(input),
-                'xml': (input) => formatXml(jsonToXml(JSON.parse(yamlToJson(input)))),
+                'xml': (input) => jsonToXml(yamlToJson(input)),
                 'yaml': (input) => formatYaml(input),
             }
         };
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     selectors.outputArea.value = inputText;
                 }
             } catch (error) {
-                selectors.outputArea.value = 'Error: ' + error.message;
+                selectors.outputArea.value = 'Erro: ' + error.message;
             }
 
             localStorage.setItem('inputText', inputText);
@@ -67,30 +67,66 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectors.outputTypeSelect.value = savedOutputType;
             }
 
-            convert(); 
+            convert();
+        }
+
+        function isValidXml(xml) {
+            const parser = new DOMParser();
+            const parsedXml = parser.parseFromString(xml, "text/xml");
+            return !parsedXml.getElementsByTagName("parsererror").length;
         }
 
         function xmlToJson(xml) {
             try {
-                return x2js.xml_str2json(xml);
+                // Adicionar um elemento raiz fictício caso não exista
+                const wrappedXml = `<root>${xml}</root>`;
+        
+                const parser = new DOMParser();
+                const parsedXml = parser.parseFromString(wrappedXml, "text/xml");
+        
+                // Verificar se há erros no XML
+                if (parsedXml.getElementsByTagName("parsererror").length) {
+                    throw new Error("O XML fornecido não é bem formado.");
+                }
+        
+                // Converter o XML para JSON usando x2js
+                const jsonObj = x2js.xml_str2json(wrappedXml);
+                if (!jsonObj) {
+                    throw new Error("O XML fornecido é inválido ou vazio.");
+                }
+        
+                // Retornar o JSON resultante sem o elemento raiz fictício
+                return JSON.stringify(jsonObj.root, null, 2);
             } catch (error) {
-                return "XML com erro: " + error.message;
+                throw new Error("Erro ao converter XML para JSON: " + error.message);
             }
         }
+        
 
         function yamlToJson(yaml) {
             try {
-                return JSON.stringify(jsyaml.load(yaml), null, 2);
+                const jsonObj = jsyaml.load(yaml);
+                return JSON.stringify(jsonObj, null, 2);
             } catch (error) {
-                return "Error: " + error.message;
+                throw new Error("Erro ao converter YAML para JSON: " + error.message);
             }
         }
 
         function jsonToXml(json) {
             try {
-                return formatXml(x2js.json2xml_str(json));
+                const jsonObj = JSON.parse(json);
+                return formatXml(x2js.json2xml_str(jsonObj));
             } catch (error) {
-                return "JSON com erro: " + error.message;
+                throw new Error("Erro ao converter JSON para XML: " + error.message);
+            }
+        }
+
+        function jsonToYaml(json) {
+            try {
+                const jsonObj = JSON.parse(json);
+                return jsyaml.dump(jsonObj);
+            } catch (error) {
+                throw new Error("Erro ao converter JSON para YAML: " + error.message);
             }
         }
 
@@ -99,12 +135,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const formattedYAML = jsyaml.load(yaml);
                 return jsyaml.dump(formattedYAML);
             } catch (error) {
-                return "Error: " + error.message;
+                throw new Error("Erro ao formatar YAML: " + error.message);
             }
         }
 
         function formatXml(xml) {
-            const PADDING = '  '; 
+            const PADDING = '  ';
             const reg = /(>)(<)(\/*)/g;
             let pad = 0;
             let formatted = '';
@@ -140,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 initEventListeners();
             }
         };
-
     })();
 
     ConverterModule.init();
