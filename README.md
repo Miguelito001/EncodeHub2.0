@@ -1,73 +1,84 @@
-# Ferramentas de Desenvolvimento
+# EncodeHub
 
-Bem-vindo ao repositório do site **Ferramentas de Desenvolvimento**! Este site oferece várias ferramentas úteis para desenvolvedores, como formatar ou converter JSON, XML,YAML, conversor de Base64 e conversor de Binário.
+Bem-vindo ao **EncodeHub**, uma plataforma web que oferece diversas ferramentas para desenvolvedores, facilitando a conversão e formatação de dados em múltiplos formatos.
 
 ## Índice
 
-- [Descrição](#descrição)
+- [Visão Geral](#visão-geral)
 - [Funcionalidades](#funcionalidades)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Como Usar](#como-usar)
-- [Possíveis Melhorias e Adições](#possíveis-melhorias-e-adições)
-- [Contribuições](#contribuições)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Instalação e Uso](#instalação-e-uso)
+- [Contribuindo](#contribuindo)
 - [Licença](#licença)
 
-## Descrição
+## Visão Geral
 
-O site **Ferramentas de Desenvolvimento** foi criado para fornecer funcionalidades úteis para desenvolvedores e entusiastas de programação. Com uma interface simples e fácil de navegar, ele oferece:
-
-1. **Home:** Página inicial com informações sobre o site e um menu para acessar as demais telas.
-2. **JSON Formatter:** Ferramenta para formatar e visualizar dados JSON de forma legível.
-3. **Base64 Converter:** Ferramenta para converter texto para base64 e vice-versa.
-4. **Binário Converter:** Ferramenta para converter texto para binário e vice-versa.
+O **EncodeHub** é uma evolução do projeto original [EncodeHub](https://github.com/Miguelito001/EncodeHub), ampliando as funcionalidades e melhorando a experiência do usuário. A plataforma permite a conversão e formatação de dados entre diversos formatos, incluindo JSON, XML, YAML, Base64 e Binário. Acesse o site em [encode-hub2-0.vercel.app](https://encode-hub2-0.vercel.app).
 
 ## Funcionalidades
 
-- **JSON Formatter:** Insira JSON bruto e obtenha uma versão formatada e legível.
-- **Base64 Converter:** Converta texto para base64 e base64 para texto.
-- **Binário Converter:** Converta texto para binário e binário para texto.
+- **Formatador e converter entre :JSON, XML E YAML**: Formate e converta os dados entre as estruturas.
+- **Conversor de Base64**: Converta texto para Base64 e vice-versa.
+- **Conversor de Binário**: Converta texto para binário e vice-versa.
+- **Gerador de Hash**: Gere hashes criptográficos para suas strings, utilizando algoritmos como SHA-1, SHA-256, entre outros.
+- **Conversor de Unidades de Medida e Monetário**: Converta valores entre diferentes unidades de medida (como metro, centimetros e milhas) e moedas, facilitando cálculos e comparações.
 
-## Estrutura do Projeto
+## Tecnologias Utilizadas
 
-```plaintext
-/
-├── index.html                # Página inicial
-├── main.css                # Arquivo de estilo CSS da pagina inicial
-├── converter/
-│   ├── converter.html   # Ferramenta Formatter/Converter
-│   ├── converter.js     # Script para Formatter/Converter
-├── base64/
-│   ├── base64.html # Ferramenta Base64 Converter
-│   ├── base64.js   # Script para Base64 Converter
-├── binario/
-│   ├── binario.html # Ferramenta Binário Converter
-│   ├── binario.js   # Script para Binário Converter
-├── geral/
-│   ├── funcoes.js  # Script padrâo pra todas paginas
-│   ├── main.css    # Arquivo de estilos CSS pra todas as paginas
-└── README.md                 # Documentação do projeto
-```
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-## Como Usar
+- **HTML5**: Estruturação das páginas web.
+- **CSS3**: Estilização e layout das interfaces.
+- **JavaScript**: Funcionalidades interativas e manipulação de dados.
+- **Vercel**: Hospedagem e deploy contínuo da aplicação.
 
-1. **Clone o repositório:**
+## Instalação e Uso
+
+Para executar o projeto localmente, siga os passos abaixo:
+
+1. **Clone o repositório**:
+
    ```bash
    git clone https://github.com/Miguelito001/EncodeHub2.0.git
-2. **Navegue até o diretório do projeto:**
+   ```
+
+2. **Navegue até o diretório do projeto**:
+
    ```bash
-   cd EncodeHub
+   cd EncodeHub2.0
+   ```
 
-## Possíveis Melhorias e Adições
+3. **Abra o arquivo `index.html`** no seu navegador preferido para acessar a aplicação.
 
-Aqui estão algumas sugestões de melhorias e novas funcionalidades que podem ser adicionadas ao site:
+## Contribuindo
 
-- **Tema Escuro/Claro:** Adicionar uma opção para alternar entre tema escuro e claro.
-- **Suporte a Arquivos:** Permitir upload de arquivos para conversão em vez de apenas texto inserido manualmente.
+Contribuições são bem-vindas! Se você deseja colaborar com o projeto, siga os passos abaixo:
 
-## Contribuições
+1. **Fork o repositório**.
+2. **Crie uma branch** para sua feature ou correção:
 
-Contribuições são bem-vindas! Se você tiver sugestões, encontrar bugs ou quiser adicionar novas funcionalidades, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+   ```bash
+   git checkout -b minha-feature
+   ```
+
+3. **Commit suas alterações**:
+
+   ```bash
+   git commit -m 'Adiciona nova funcionalidade'
+   ```
+
+4. **Envie para o repositório remoto**:
+
+   ```bash
+   git push origin minha-feature
+   ```
+
+5. **Abra um Pull Request** no GitHub.
 
 ## Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](https://github.com/Miguelito001/EncodeHub2.0/blob/main/LICENSE) para mais detalhes.
+
+---
+
+*Nota: Este projeto é mantido por [Luiz Miguel](https://github.com/Miguelito001), estudante de Engenharia de Software.* 
