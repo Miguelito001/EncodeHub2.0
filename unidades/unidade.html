@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Conversores - Medidas e Moedas</title>
+    <script src="unidade.js" defer></script>
+    <script src="../geral/funcoes.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="../download.jpg">
+    <link rel="stylesheet" href="../geral/geral.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Conversor de Unidades -->
+        <section class="converter-section" data-type="measure">
+            <textarea class="large-area large-area--input" spellcheck="false"
+                placeholder="Digite o valor para converter medidas..."></textarea>
+            <div class="controls">
+                <a href="../index.html">
+                    <button type="button" class="controls__button controls__button--central">Central</button>
+                </a>
+
+                <label for="input-format" class="controls__button controls__button--format">Unidade</label>
+                <select id="input-format" class="controls__button controls__button--select">
+                    <option value="meters">Metros</option>
+                    <option value="kilometers">Quilômetros</option>
+                    <option value="centimeters">Centímetros</option>
+                    <option value="miles">Milhas</option>
+                    <option value="feet">Pés</option>
+                </select>
+
+                <label for="output-format" class="controls__button controls__button--format">Para</label>
+                <select id="output-format" class="controls__button controls__button--convert">
+                    <option value="meters">Metros</option>
+                    <option value="kilometers">Quilômetros</option>
+                    <option value="centimeters">Centímetros</option>
+                    <option value="miles">Milhas</option>
+                    <option value="feet">Pés</option>
+                </select>
+
+                <button type="button" class="controls__button controls__button--generate">Converter</button>
+            </div>
+            <div class="large-area--output-container">
+                <textarea class="large-area--output" spellcheck="false"
+                    placeholder="O resultado da conversão de medidas aparecerá aqui!..."></textarea>
+            </div>
+            <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
+                <button type="button" class="controls__button controls__button--github">GitHub</button>
+            </a>
+        </section>
+
+        <hr />
+
+        <!-- Conversor de Moedas -->
+        <section class="converter-section" data-type="currency">
+            <textarea class="large-area large-area--input" spellcheck="false"
+                placeholder="Digite o valor para converter moedas..."></textarea>
+            <div class="controls">
+                <a href="../index.html">
+                    <button type="button" class="controls__button controls__button--central">Central</button>
+                </a>
+
+                <label for="input-format" class="controls__button controls__button--format">De Moeda</label>
+                <select id="input-format" class="controls__button controls__button--select">
+                    <option value="USD">USD - Dólar</option>
+                    <option value="BRL">BRL - Real</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - Libra</option>
+                </select>
+
+                <label for="output-format" class="controls__button controls__button--format">Para</label>
+                <select id="output-format" class="controls__button controls__button--convert">
+                    <option value="USD">USD - Dólar</option>
+                    <option value="BRL">BRL - Real</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - Libra</option>
+                </select>
+
+                <button type="button" class="controls__button controls__button--generate">Converter</button>
+            </div>
+            <div class="large-area--output-container">
+                <textarea class="large-area--output" spellcheck="false"
+                    placeholder="O resultado da conversão de moedas aparecerá aqui!..."></textarea>
+            </div>
+            <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
+                <button type="button" class="controls__button controls__button--github">GitHub</button>
+            </a>
+        </section>
+    </div>
+</body>
+
+
+</html>

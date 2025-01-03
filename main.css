@@ -1,57 +1,56 @@
 body{
-    margin: 0;
-    background-color: #333333;
-    }
-    .container{
-      display: grid;
-      grid-template-columns: 1fr 10%;
-      align-items: center;
-      height: 100vh;
-      box-sizing: border-box;
-      padding: 20px;
-      gap: 20px;
-      position:relative;
-   
-    }
-    .controls__button{
-      padding: 8px 14px;
-      width: 100%;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      background: #009578;
-      color: #ffffff;
-      font-weight: bold;
-      
-    }
+  margin: 0;
+  background-color: #333333;
+  }
+  .container{
+    display: grid;
+    grid-template-columns: 1fr 10%;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    gap: 20px;
+    position:relative;
+ 
+  }
+  .controls__button{
+    padding: 8px 14px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #009578;
+    color: #ffffff;
+    font-weight: bold;
     
-    .controls__button:active{
-      background: #00705a;
-    }
-    .controls__github{
-      width: 5%;
-      position: absolute;
-      bottom: 15px;
-      right: 25px;
-    }
-    .content{
-      color: rgb(185, 181, 176);
-      font-family: monospace;
-      padding-left: 4%;
-      padding-bottom: 4%;
-      font-size: 16px;
-      
-    }
-    .nomeSite{
-      font-size: 80px;
-        margin-top: 0;
-    }
-    .descricao{
-      padding: 0 15px 0 15px;
-      text-align: justify; 
-    }
-    .site{
-      color: rgb(185, 181, 176);
-    }
+  }
+  .controls__button:active{
+    background: #00705a;
+  }
+  .controls__github{
+    width: 5%;
+    position: absolute;
+    bottom: 15px;
+    right: 25px;
+  }
+  .content{
+    color: rgb(185, 181, 176);
+    font-family: monospace;
+    padding-left: 4%;
+    padding-bottom: 4%;
+    font-size: 16px;
+    
+  }
+  .nomeSite{
+    font-size: 80px;
+      margin-top: 0;
+  }
+  .descricao{
+    padding: 0 15px 0 15px;
+    text-align: justify; 
+  }
+  .site{
+    color: rgb(185, 181, 176);
+  }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Gerador de Hash</title>
+  <!-- Certifique-se de que os caminhos estão corretos -->
+  <script src="hash.js" defer></script>
+  <script src="../geral/funcoes.js" defer></script>
+  <link rel="icon" type="image/x-icon" href="../download.jpg">
+  <link rel="stylesheet" href="../geral/geral.css">
+</head>
+
+<body>
+  <div class="container">
+    <textarea class="large-area large-area--input" spellcheck="false"
+      placeholder="Digite seu conteúdo aqui!..."></textarea>
+
+      <div class="controls">
+        <a href="../index.html">
+          <button type="button" class="controls__button controls__button--central">Central</button>
+        </a>
+      
+        <label for="input-format" class="controls__button controls__button--format">Algoritmo</label>
+        <select id="input-format" class="controls__button controls__button--select">
+          <option value="SHA-256">SHA-256</option>
+          <option value="SHA-384">SHA-384</option>
+          <option value="SHA-512">SHA-512</option>
+          <option value="SHA-1">SHA-1</option>
+        </select>
+      
+        <button id="generate-hash" type="button" class="controls__button controls__button--generate">Gerar</button>
+      
+        <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
+          <button type="button" class="controls__button controls__button--github">GitHub</button>
+        </a>
+      </div>      
+
+    <div class="large-area--output-container">
+      <textarea class="large-area--output" spellcheck="false" placeholder="O hash gerado aparecerá aqui!..."></textarea>
+      <button id="toggle-expand-btn" class="toggle-expand-btn">🔳</button>
+    </div>
+
+  </div>
+</body>
+
+</html>

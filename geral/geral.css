@@ -125,3 +125,13 @@ body {
   height: 100%;
   width: 100%;
 }
+/* Ajuste específico para as sections do caso apresentado */
+section.converter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaçamento interno entre os elementos da section */
+  padding: 20px; /* Espaçamento interno adicional */
+  background-color: #3a3a3a; /* Cor de fundo para destaque */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+}
