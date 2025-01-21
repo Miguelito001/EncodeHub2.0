@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadoras de Horas e Datas</title>
+  <link rel="stylesheet" href="../geral/geral.css" />
+  <script src="data.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Cálculo de Carga Horária -->
+    <section class="converter-section" data-type="time-calculator">
+        <a href="../index.html">
+            <button type="button" class="controls__button controls__button--central">Central</button>
+        </a>
+      <textarea class="large-area large-area--input" spellcheck="false" placeholder="Insira os horários (HH:MM), separados por vírgula: Entrada, Saída Almoço, Retorno Almoço, Saída Final"></textarea>
+      <div class="controls">
+        <button type="button" class="controls__button controls__button--generate">Calcular</button>
+      </div>
+      <div class="large-area--output-container">
+        <textarea class="large-area--output" spellcheck="false" placeholder="O resultado do cálculo de carga horária aparecerá aqui!"></textarea>
+      </div>
+      <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
+        <button type="button" class="controls__button controls__button--github">GitHub</button>
+    </a>
+    </section>
+
+    <hr />
+
+    <!-- Cálculo de Data Final -->
+    <section class="converter-section" data-type="date-calculator">
+        <a href="../index.html">
+            <button type="button" class="controls__button controls__button--central">Central</button>
+        </a>
+      <textarea class="large-area large-area--input" spellcheck="false" placeholder="Insira a data inicial (YYYY-MM-DD) e a quantidade de horas, separados por vírgula."></textarea>
+      <div class="controls">
+        <button type="button" class="controls__button controls__button--generate">Calcular</button>
+      </div>
+      <div class="large-area--output-container">
+        <textarea class="large-area--output" spellcheck="false" placeholder="A data final considerando dias úteis e feriados aparecerá aqui!"></textarea>
+      </div>
+      <a href="https://github.com/Miguelito001/EncodeHub2.0" target="_blank">
+        <button type="button" class="controls__button controls__button--github">GitHub</button>
+    </a>
+    </section>
+  </div>
+</body>
+
+</html>
