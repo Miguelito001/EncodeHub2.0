@@ -39,7 +39,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const horas = Math.floor(horasTrabalhadas / 60);
             const minutos = horasTrabalhadas % 60;
 
-            output.value = `Total: ${horas} horas e ${minutos} minutos.`;
+            const diferenca = horasTrabalhadas - (8 * 60);
+            if (diferenca > 0) {
+                output.value = `Você trabalhou ${horas} horas e ${minutos} minutos. Excedeu ${Math.floor(diferenca / 60)} horas e ${diferenca % 60} minutos.`;
+            } else if (diferenca < 0) {
+                const absDiferenca = Math.abs(diferenca);
+                output.value = `Você trabalhou ${horas} horas e ${minutos} minutos. Faltaram ${Math.floor(absDiferenca / 60)} horas e ${absDiferenca % 60} minutos para completar 8 horas.`;
+            } else {
+                output.value = `Você trabalhou exatamente 8 horas.`;
+            }
         }
     };
 
