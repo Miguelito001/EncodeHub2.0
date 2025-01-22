@@ -1,77 +1,74 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Função para calcular carga horária
     const calculateWorkHours = (section) => {
-        const input = section.querySelector('.large-area--input').value.trim();
+        const entrada = section.querySelector('#entrada').value;
+        const saidaAlmoco = section.querySelector('#saida-almoco').value;
+        const retornoAlmoco = section.querySelector('#retorno-almoco').value;
+        const saidaFinal = section.querySelector('#saida-final').value;
         const output = section.querySelector('.large-area--output');
 
-        if (!input) {
-            output.value = 'Por favor, insira os horários no formato correto.';
+        if (!entrada || !saidaAlmoco || !retornoAlmoco) {
+            output.value = 'Por favor, preencha pelo menos os horários de entrada, saída para almoço e retorno do almoço.';
             return;
         }
 
-        const horarios = input.split(',');
+        const toMinutes = (time) => {
+            const [hours, minutes] = time.split(':').map(Number);
+            return hours * 60 + minutes;
+        };
 
-        if (horarios.length < 3) {
-            output.value = 'Insira pelo menos 3 horários: entrada, saída para almoço e retorno do almoço.';
-            return;
-        }
+        const entradaMin = toMinutes(entrada);
+        const saidaAlmocoMin = toMinutes(saidaAlmoco);
+        const retornoAlmocoMin = toMinutes(retornoAlmoco);
+        const saidaFinalMin = saidaFinal ? toMinutes(saidaFinal) : null;
 
-        // Convertendo horários para minutos desde o início do dia
-        const [entrada, saidaAlmoco, retornoAlmoco, saidaFinal] = horarios.map(horario => {
-            if (!horario) return null;
-            const [horas, minutos] = horario.split(':').map(Number);
-            return horas * 60 + minutos;
-        });
+        const horasTrabalhadas = (saidaAlmocoMin - entradaMin) + (saidaFinalMin ? (saidaFinalMin - retornoAlmocoMin) : 0);
+        const minutosFaltantes = (8 * 60) - horasTrabalhadas;
 
-        if (horarios.length === 3 || !saidaFinal) {
-            // Se o quarto horário não for preenchido, calcula o horário necessário para fechar 8 horas
-            const trabalhoManha = saidaAlmoco - entrada;
+        if (!saidaFinalMin) {
+            // Calcula o horário necessário para completar 8 horas
+            const trabalhoManha = saidaAlmocoMin - entradaMin;
             const trabalhoTarde = 8 * 60 - trabalhoManha; // Completa 8h no total
-            const horarioSaidaNecessario = retornoAlmoco + trabalhoTarde;
+            const horarioSaidaNecessario = retornoAlmocoMin + trabalhoTarde;
 
             const horasSaida = Math.floor(horarioSaidaNecessario / 60);
             const minutosSaida = horarioSaidaNecessario % 60;
 
-            output.value = `Para completar 8 horas, o horário de saída deve ser: ${horasSaida.toString().padStart(2, '0')}:${minutosSaida.toString().padStart(2, '0')}`;
+            output.value = `Para completar 8 horas, o horário de saída deve ser: ${horasSaida.toString().padStart(2, '0')}:${minutosSaida.toString().padStart(2, '0')}.`;
         } else {
-            // Caso todos os 4 horários sejam preenchidos
-            const horasTrabalhadas = (saidaAlmoco - entrada) + (saidaFinal - retornoAlmoco);
+            // Exibe o total de horas trabalhadas e verifica se excedeu ou faltou tempo
             const horas = Math.floor(horasTrabalhadas / 60);
             const minutos = horasTrabalhadas % 60;
 
-            const diferenca = horasTrabalhadas - (8 * 60);
-            if (diferenca > 0) {
-                output.value = `Você trabalhou ${horas} horas e ${minutos} minutos. Excedeu ${Math.floor(diferenca / 60)} horas e ${diferenca % 60} minutos.`;
-            } else if (diferenca < 0) {
-                const absDiferenca = Math.abs(diferenca);
-                output.value = `Você trabalhou ${horas} horas e ${minutos} minutos. Faltaram ${Math.floor(absDiferenca / 60)} horas e ${absDiferenca % 60} minutos para completar 8 horas.`;
+            if (minutosFaltantes > 0) {
+                const faltamHoras = Math.floor(minutosFaltantes / 60);
+                const faltamMinutos = minutosFaltantes % 60;
+                output.value = `Total: ${horas} horas e ${minutos} minutos. Faltam ${faltamHoras} horas e ${faltamMinutos} minutos para completar 8 horas.`;
             } else {
-                output.value = `Você trabalhou exatamente 8 horas.`;
+                const excedenteMinutos = Math.abs(minutosFaltantes);
+                const excedenteHoras = Math.floor(excedenteMinutos / 60);
+                const excedenteRestante = excedenteMinutos % 60;
+                output.value = `Total: ${horas} horas e ${minutos} minutos. Excedeu ${excedenteHoras} horas e ${excedenteRestante} minutos das 8 horas.`;
             }
         }
     };
 
     // Função para calcular data final
     const calculateFinalDate = (section) => {
-        const input = section.querySelector('.large-area--input').value.trim();
+        const dataInicialInput = section.querySelector('#data-inicial').value;
+        const horasInput = section.querySelector('#horas').value;
         const output = section.querySelector('.large-area--output');
 
-        if (!input) {
-            output.value = 'Por favor, insira a data inicial e a quantidade de horas.';
-            return;
-        }
-
-        const [dataInicial, horas] = input.split(',');
-        if (!dataInicial || isNaN(horas) || horas <= 0) {
-            output.value = 'Formato inválido. Use: YYYY-MM-DD,horas (exemplo: 2025-01-21,16).';
+        if (!dataInicialInput || !horasInput || horasInput <= 0) {
+            output.value = 'Por favor, preencha a data inicial e a quantidade de horas corretamente.';
             return;
         }
 
         const feriadosGenericos = ['01-01', '04-21', '05-01', '09-07', '12-25'];
 
         try {
-            const data = new Date(dataInicial);
-            let horasRestantes = parseInt(horas, 10);
+            const data = new Date(dataInicialInput);
+            let horasRestantes = parseInt(horasInput, 10);
 
             while (horasRestantes > 0) {
                 data.setDate(data.getDate() + 1);
