@@ -25,7 +25,7 @@ var BinaryConverterModule = (function () {
         var binary = '';
         for (var i = 0; i < text.length; i++) {
             var binChar = text.charCodeAt(i).toString(2);
-            binary += '0'.repeat(8 - binChar.length) + binChar;
+            binary += '0'.repeat(8 - binChar.length) + binChar + ' ';
         }
         return binary;
     }
