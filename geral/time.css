@@ -4,12 +4,14 @@ body {
   }
   
   .container {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    box-sizing: border-box;
+    display: flex; /* Usar flexbox para alinhamento lado a lado */
+    flex-wrap: wrap; /* Permite que as seções se ajustem caso o espaço seja insuficiente */
+    justify-content: center; /* Centraliza as seções horizontalmente */
+    align-items:center; /* Alinha os elementos ao topo */
+    height: 100vh;
+    gap: 20px; /* Espaço entre as seções */
     padding: 20px;
-    gap: 20px;
+    box-sizing: border-box;
   }
   
   .large-area {
@@ -147,10 +149,25 @@ body {
   section.converter-section {
     display: flex;
     flex-direction: column;
+    flex: 1 1 45%; /* Cada seção ocupa 45% da largura do container */
     gap: 20px;
     padding: 20px;
     background-color: #3a3a3a;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 300px; /* Define uma largura mínima para evitar layouts quebrados */
+    max-width: 600px; /* Define uma largura máxima */
+    min-height: 200px; /* Define uma largura mínima para evitar layouts quebrados */
+    max-height: 900px; /* Define uma largura máxima */
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Em telas menores, as seções ficam empilhadas */
+    }
+  
+    section.converter-section {
+      flex: 1 1 100%; /* Seções ocupam 100% da largura no modo coluna */
+    }
   }
   
