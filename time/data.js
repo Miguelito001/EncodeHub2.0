@@ -54,92 +54,124 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const calculateFinalDate = (section) => {
-    const dataInicialInput = section.querySelector('#data-inicial').value;
-    const horasInput = section.querySelector('#horas').value;
-    const output = section.querySelector('.large-area--output');
+        const dataInicialInput = section.querySelector('#data-inicial').value;
+        const horasInput = section.querySelector('#horas').value;
+        const output = section.querySelector('.large-area--output');
 
-    if (!dataInicialInput || !horasInput || horasInput <= 0) {
-        output.value = 'Por favor, preencha a data inicial e a quantidade de horas corretamente.';
-        return;
-    }
-
-    const feriadosGenericos = ['01-01', '04-21', '05-01', '09-07', '12-25'];
-
-    try {
-        let data = new Date(dataInicialInput);
-        let horasRestantes = parseInt(horasInput, 10);
-
-        // Configuração do horário de trabalho
-        const horarioManhaInicio = 8 * 60; // 8:00 em minutos
-        const horarioManhaFim = 12 * 60; // 12:00 em minutos
-        const horarioTardeInicio = 13 * 60 + 12; // 13:12 em minutos
-        const horarioTardeFim = 18 * 60; // 18:00 em minutos
-        const horasPorDia = (horarioManhaFim - horarioManhaInicio) + (horarioTardeFim - horarioTardeInicio); // Total de horas úteis por dia
-
-        // Garante que a data inicial nunca esteja no passado
-        const hoje = new Date();
-        if (data < hoje) {
-            data = hoje;
-        }
-
-        // Verificação de horas no dia inicial
-        const calculaHorasDisponiveisHoje = () => {
-            const minutosAgora = data.getHours() * 60 + data.getMinutes();
-            let minutosDisponiveis = 0;
-
-            if (minutosAgora < horarioManhaInicio) {
-                minutosDisponiveis = horasPorDia;
-            } else if (minutosAgora < horarioManhaFim) {
-                minutosDisponiveis = (horarioManhaFim - minutosAgora) + (horarioTardeFim - horarioTardeInicio);
-            } else if (minutosAgora < horarioTardeInicio) {
-                minutosDisponiveis = horarioTardeFim - horarioTardeInicio;
-            } else if (minutosAgora < horarioTardeFim) {
-                minutosDisponiveis = horarioTardeFim - minutosAgora;
-            }
-
-            return minutosDisponiveis;
-        };
-
-        // Ajusta as horas do primeiro dia
-        let minutosRestantes = horasRestantes * 60;
-        let minutosDisponiveisHoje = calculaHorasDisponiveisHoje();
-        minutosRestantes -= minutosDisponiveisHoje;
-
-        if (minutosRestantes <= 0) {
-            const dataFinal = new Date(data);
-            const horaFinal = horarioTardeFim - Math.abs(minutosRestantes);
-            const horasSaida = Math.floor(horaFinal / 60);
-            const minutosSaida = horaFinal % 60;
-
-            output.value = `Data Final: ${dataFinal.toLocaleDateString('pt-BR')}, às ${horasSaida.toString().padStart(2, '0')}:${minutosSaida.toString().padStart(2, '0')}`;
+        if (!dataInicialInput || !horasInput || horasInput <= 0) {
+            output.value = 'Por favor, preencha a data inicial e a quantidade de horas corretamente.';
             return;
         }
 
-        // Ajusta os dias seguintes
-        while (minutosRestantes > 0) {
-            data.setDate(data.getDate() + 1);
+        const feriadosGenericos = ['01-01', '04-21', '05-01', '09-07', '12-25'];
 
-            const diaSemana = data.getDay();
-            const mesDia = data.toISOString().slice(5, 10);
+        try {
+            let data = new Date(dataInicialInput);
+            let horasRestantes = parseInt(horasInput, 10);
 
-            if (diaSemana !== 0 && diaSemana !== 6 && !feriadosGenericos.includes(mesDia)) {
-                const minutosDia = Math.min(horasPorDia, minutosRestantes);
-                minutosRestantes -= minutosDia;
+            // Configuração do horário de trabalho
+            const horarioManhaInicio = 8 * 60; // 8:00 em minutos
+            const horarioManhaFim = 12 * 60; // 12:00 em minutos
+            const horarioTardeInicio = 13 * 60 + 12; // 13:12 em minutos
+            const horarioTardeFim = 18 * 60; // 18:00 em minutos
+            const horasPorDia = (horarioManhaFim - horarioManhaInicio) + (horarioTardeFim - horarioTardeInicio); // Total de horas úteis por dia
+
+            // Garante que a data inicial nunca esteja no passado
+            const hoje = new Date();
+            if (data < hoje) {
+                data = hoje;
             }
+
+            // Verificação de horas no dia inicial
+            const calculaHorasDisponiveisHoje = () => {
+                const minutosAgora = data.getHours() * 60 + data.getMinutes();
+                let minutosDisponiveis = 0;
+
+                if (minutosAgora < horarioManhaInicio) {
+                    minutosDisponiveis = horasPorDia;
+                } else if (minutosAgora < horarioManhaFim) {
+                    minutosDisponiveis = (horarioManhaFim - minutosAgora) + (horarioTardeFim - horarioTardeInicio);
+                } else if (minutosAgora < horarioTardeInicio) {
+                    minutosDisponiveis = horarioTardeFim - horarioTardeInicio;
+                } else if (minutosAgora < horarioTardeFim) {
+                    minutosDisponiveis = horarioTardeFim - minutosAgora;
+                }
+
+                return minutosDisponiveis;
+            };
+
+            // Ajusta as horas do primeiro dia
+            let minutosRestantes = horasRestantes * 60;
+            let minutosDisponiveisHoje = calculaHorasDisponiveisHoje();
+            minutosRestantes -= minutosDisponiveisHoje;
+
+            if (minutosRestantes <= 0) {
+                const dataFinal = new Date(data);
+                const horaFinal = horarioTardeFim - Math.abs(minutosRestantes);
+                const horasSaida = Math.floor(horaFinal / 60);
+                const minutosSaida = horaFinal % 60;
+
+                output.value = `Data Final: ${dataFinal.toLocaleDateString('pt-BR')}, às ${horasSaida.toString().padStart(2, '0')}:${minutosSaida.toString().padStart(2, '0')}`;
+                return;
+            }
+
+            // Ajusta os dias seguintes
+            while (minutosRestantes > 0) {
+                data.setDate(data.getDate() + 1);
+
+                const diaSemana = data.getDay();
+                const mesDia = data.toISOString().slice(5, 10);
+
+                if (diaSemana !== 0 && diaSemana !== 6 && !feriadosGenericos.includes(mesDia)) {
+                    const minutosDia = Math.min(horasPorDia, minutosRestantes);
+                    minutosRestantes -= minutosDia;
+                }
+            }
+
+            output.value = `Data Final: ${data.toLocaleDateString('pt-BR')}`;
+        } catch {
+            output.value = 'Erro ao calcular a data. Verifique os valores inseridos.';
         }
+    };
 
-        output.value = `Data Final: ${data.toLocaleDateString('pt-BR')}`;
-    } catch {
-        output.value = 'Erro ao calcular a data. Verifique os valores inseridos.';
-    }
-};
-
+    const handleEnterKey = (event, section) => {
+        if (event.key === 'Enter') {
+            const inputs = Array.from(section.querySelectorAll('input, textarea'));
+            const currentIndex = inputs.indexOf(event.target);
+    
+            if (currentIndex >= 0 && currentIndex < inputs.length - 2) {
+                // Move o foco para o próximo input no mesmo contexto
+                inputs[currentIndex + 1].focus();
+            } else {
+                // Executa a ação associada ao botão diretamente ao pressionar Enter no último campo
+                const button = section.querySelector('.controls__button--generate');
+                if (button) {
+                    button.click(); // Clique automático no botão
+                }
+            }
+            event.preventDefault(); // Impede comportamento padrão
+        }
+    };
+    
 
     // Adicionando os eventos para cada seção
     document.querySelectorAll('.converter-section').forEach((section) => {
         const type = section.getAttribute('data-type');
         const button = section.querySelector('.controls__button--generate');
+        const inputs = section.querySelectorAll('input, textarea');
 
+        // Impede que o usuário edite diretamente os campos de saída
+        const output = section.querySelector('.large-area--output');
+        if (output) {
+            output.setAttribute('readonly', true);
+        }
+
+        // Adiciona o evento de tecla "Enter" nos campos de entrada
+        inputs.forEach((input) => {
+            input.addEventListener('keydown', (event) => handleEnterKey(event, section));
+        });
+
+        // Adiciona o evento de clique no botão
         button.addEventListener('click', () => {
             if (type === 'time-calculator') {
                 calculateWorkHours(section);
