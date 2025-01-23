@@ -35,9 +35,8 @@ body {
 }
 
 .controls__button {
-  width: 100%;
-    padding: 5px;
-    margin: 2px;
+   width: 100%;
+    padding: 10px;
     border-radius: 5px;
     background: #444444;
     color: #eeeeee;
@@ -121,18 +120,6 @@ label {
   font-size: 0.9rem;
   margin-bottom: 5px;
   display: block;
-}
-.controls__button--format,
-.controls__button--select,
-.controls__button--convert {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    background: #444444;
-    color: #eeeeee;
-    border: 1px solid #666666;
-    outline: none;
-    transition: border-color 0.3s;
 }
 
 .controls__button:hover {
