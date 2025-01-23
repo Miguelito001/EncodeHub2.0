@@ -1,84 +1,61 @@
-# EncodeHub
+# EncodeHub 2.0
 
-Bem-vindo ao **EncodeHub**, uma plataforma web que oferece diversas ferramentas para desenvolvedores, facilitando a conversão e formatação de dados em múltiplos formatos.
-
-## Índice
-
-- [Visão Geral](#visão-geral)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Instalação e Uso](#instalação-e-uso)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
-
-## Visão Geral
-
-O **EncodeHub** é uma evolução do projeto original [EncodeHub](https://github.com/Miguelito001/EncodeHub), ampliando as funcionalidades e melhorando a experiência do usuário. A plataforma permite a conversão e formatação de dados entre diversos formatos, incluindo JSON, XML, YAML, Base64 e Binário. Acesse o site em [encode-hub2-0.vercel.app](https://encode-hub2-0.vercel.app).
+EncodeHub 2.0 é uma ferramenta online completa para conversão, formatação e manipulação de dados, criada para desenvolvedores e usuários técnicos que precisam de eficiência em suas tarefas do dia a dia.
 
 ## Funcionalidades
 
-- **Formatador e converter entre :JSON, XML E YAML**: Formate e converta os dados entre as estruturas.
-- **Conversor de Base64**: Converta texto para Base64 e vice-versa.
-- **Conversor de Binário**: Converta texto para binário e vice-versa.
-- **Gerador de Hash**: Gere hashes criptográficos para suas strings, utilizando algoritmos como SHA-1, SHA-256, entre outros.
-- **Conversor de Unidades de Medida e Monetário**: Converta valores entre diferentes unidades de medida (como metro, centimetros e milhas) e moedas, facilitando cálculos e comparações.
+### Conversores
 
-## Tecnologias Utilizadas
+- **Conversor JSON, XML e YAML**
+  - Converta dados entre JSON, XML e YAML de maneira rápida e simples.
 
-O projeto foi desenvolvido utilizando as seguintes tecnologias:
+- **Conversor Base64**
+  - Converta texto para Base64 e Base64 para texto.
 
-- **HTML5**: Estruturação das páginas web.
-- **CSS3**: Estilização e layout das interfaces.
-- **JavaScript**: Funcionalidades interativas e manipulação de dados.
-- **Vercel**: Hospedagem e deploy contínuo da aplicação.
+- **Conversor Binário**
+  - Traduza texto para binário e binário para texto.
 
-## Instalação e Uso
+- **Conversor de Unidades de Medida**
+  - Converta valores entre diferentes unidades de medida, como metros, quilômetros, milhas e mais.
 
-Para executar o projeto localmente, siga os passos abaixo:
+- **Conversor Monetário**
+  - Realize conversões entre moedas diferentes.
 
-1. **Clone o repositório**:
+### Geradores e Calculadoras
 
-   ```bash
-   git clone https://github.com/Miguelito001/EncodeHub2.0.git
-   ```
+- **Gerador de Hash**
+  - Gera hashes criptográficos para strings utilizando algoritmos como SHA-1, SHA-256 e outros.
 
-2. **Navegue até o diretório do projeto**:
+### Manipulação de Tempo
 
-   ```bash
-   cd EncodeHub2.0
-   ```
+- **Calculadora de Horas de trabalho**
+  - Descubra a data final de um projeto utilizando a data inical e a quantidade de horas.
 
-3. **Abra o arquivo `index.html`** no seu navegador preferido para acessar a aplicação.
+- **Calculadora de Carga Horaria**
+  - Calcula a carga horaria do dia.
 
-## Contribuindo
+## Estrutura do Repositório
 
-Contribuições são bem-vindas! Se você deseja colaborar com o projeto, siga os passos abaixo:
+A organização do projeto é baseada em diretórios dedicados a cada funcionalidade:
 
-1. **Fork o repositório**.
-2. **Crie uma branch** para sua feature ou correção:
+- `base64/` - Código relacionado ao conversor Base64.
+- `binario/` - Código relacionado ao conversor Binário.
+- `converter/` - Ferramentas para conversão entre JSON, XML e YAML.
+- `hash/` - Geradores de hash.
+- `time/` - Funcionalidades relacionadas a tempo e datas.
+- `unidades/` - Conversores de unidades de medida.
 
-   ```bash
-   git checkout -b minha-feature
-   ```
+## Como Contribuir
 
-3. **Commit suas alterações**:
-
-   ```bash
-   git commit -m 'Adiciona nova funcionalidade'
-   ```
-
-4. **Envie para o repositório remoto**:
-
-   ```bash
-   git push origin minha-feature
-   ```
-
-5. **Abra um Pull Request** no GitHub.
+1. Faça um fork do repositório.
+2. Crie um branch para suas alterações: `git checkout -b minha-nova-funcionalidade`.
+3. Envie suas alterações: `git commit -m 'Adicionei uma nova funcionalidade'`.
+4. Submeta o pull request e aguarde revisão.
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](https://github.com/Miguelito001/EncodeHub2.0/blob/main/LICENSE) para mais detalhes.
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
 
-*Nota: Este projeto é mantido por [Luiz Miguel](https://github.com/Miguelito001), estudante de Engenharia de Software.* 
+EncodeHub 2.0: **Seu hub de soluções para manipulação de dados!**
