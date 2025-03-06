@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function xmlToJson(xml) {
             try {
                 // Adicionar um elemento raiz fictício caso não exista
-                const wrappedXml = <root>${xml}</root>;
+                const wrappedXml = `<root>${xml}</root>`;
         
                 const parser = new DOMParser();
                 const parsedXml = parser.parseFromString(wrappedXml, "text/xml");
