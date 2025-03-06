@@ -8,41 +8,30 @@ document.addEventListener('DOMContentLoaded', function () {
             inputTypeSelect: document.querySelector('#input-format'),
             outputTypeSelect: document.querySelector('#output-format')
         };
-
-        function isJsonLike(input) {
-            return /^[\w{}[\],=.\s:+-]+$/.test(input) && input.includes('=');
-        }
-
         function jsonLikeToJson(input) {
-    // Substitui "=" por ":" apenas quando necessário e adiciona aspas corretas
-    let corrected = input
-        .replace(/(\w+)=/g, '"$1":') // Adiciona aspas às chaves
-        .replace(/([{,]\s*)(\w+)(\s*:)/g, '$1"$2"$3') // Garante que todas as chaves tenham aspas
-        .replace(/([{,]\s*)'([^']+)'(\s*:)/g, '$1"$2"$3') // Converte chaves com aspas simples para duplas
-        .replace(/([{,]\s*)'([^']+)'(\s*[}\],])/g, '$1"$2"$3') // Converte strings com aspas simples para duplas
-        .replace(/([{,]\s*)(\d+\.\d+E[\d+-]+)(\s*[}\],])/gi, '$1"$2"$3') // Trata números científicos corretamente
-        .replace(/([{,]\s*)(true|false|null)(\s*[}\],])/gi, '$1"$2"$3') // Garante que booleanos e null fiquem corretos
-        .replace(/([{,]\s*)(\d+)(\s*[}\],])/g, '$1$2$3') // Mantém números sem aspas
-
-    try {
-        return JSON.stringify(JSON.parse(corrected), null, 2); // Converte e formata JSON
-    } catch (error) {
-        console.error("Erro ao converter JSON-like para JSON:", error);
-        return "Erro ao converter JSON-like para JSON.";
-    }
-}
-
+        // Substitui "=" por ":" apenas quando necessário e adiciona aspas corretas
+        let corrected = input
+            .replace(/(\w+)=/g, '"$1":') // Adiciona aspas às chaves
+            .replace(/([{,]\s*)(\w+)(\s*:)/g, '$1"$2"$3') // Garante que todas as chaves tenham aspas
+            .replace(/([{,]\s*)'([^']+)'(\s*:)/g, '$1"$2"$3') // Converte chaves com aspas simples para duplas
+            .replace(/([{,]\s*)'([^']+)'(\s*[}\],])/g, '$1"$2"$3') // Converte strings com aspas simples para duplas
+            .replace(/([{,]\s*)(\d+\.\d+E[\d+-]+)(\s*[}\],])/gi, '$1"$2"$3') // Trata números científicos corretamente
+            .replace(/([{,]\s*)(true|false|null)(\s*[}\],])/gi, '$1"$2"$3') // Garante que booleanos e null fiquem corretos
+            .replace(/([{,]\s*)(\d+)(\s*[}\],])/g, '$1$2$3') // Mantém números sem aspas
+    
+            try {
+                return JSON.stringify(JSON.parse(corrected), null, 2); // Converte e formata JSON
+            } catch (error) {
+                console.error("Erro ao converter JSON-like para JSON:", error);
+                return "Erro ao converter JSON-like para JSON.";
+            }
+        }    
 
         const conversionFunctions = {
             'json': {
-                'json': (input) => {
-                    if (isJsonLike(input)) {
-                        return jsonLikeToJson(input);
-                    }
-                    return JSON.stringify(JSON.parse(input), null, 2);
-                },
-                'xml': (input) => jsonToXml(input),
-                'yaml': (input) => jsonToYaml(input),
+                'json': (input) => JSON.stringify(JSON.parse(jsonLikeToJson(input)), null, 2),
+                'xml': (input) => jsonToXml(jsonLikeToJson(input)),
+                'yaml': (input) => jsonToYaml(jsonLikeToJson(input)),
             },
             'xml': {
                 'json': (input) => xmlToJson(input),
@@ -99,26 +88,38 @@ document.addEventListener('DOMContentLoaded', function () {
             convert();
         }
 
+        function isValidXml(xml) {
+            const parser = new DOMParser();
+            const parsedXml = parser.parseFromString(xml, "text/xml");
+            return !parsedXml.getElementsByTagName("parsererror").length;
+        }
+
         function xmlToJson(xml) {
             try {
-                const wrappedXml = `<root>${xml}</root>`;
+                // Adicionar um elemento raiz fictício caso não exista
+                const wrappedXml = <root>${xml}</root>;
+        
                 const parser = new DOMParser();
                 const parsedXml = parser.parseFromString(wrappedXml, "text/xml");
-
+        
+                // Verificar se há erros no XML
                 if (parsedXml.getElementsByTagName("parsererror").length) {
                     throw new Error("O XML fornecido não é bem formado.");
                 }
-
+        
+                // Converter o XML para JSON usando x2js
                 const jsonObj = x2js.xml_str2json(wrappedXml);
                 if (!jsonObj) {
                     throw new Error("O XML fornecido é inválido ou vazio.");
                 }
-
+        
+                // Retornar o JSON resultante sem o elemento raiz fictício
                 return JSON.stringify(jsonObj.root, null, 2);
             } catch (error) {
                 throw new Error("Erro ao converter XML para JSON: " + error.message);
             }
         }
+        
 
         function yamlToJson(yaml) {
             try {
