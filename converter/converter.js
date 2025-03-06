@@ -9,37 +9,43 @@ document.addEventListener('DOMContentLoaded', function () {
             outputTypeSelect: document.querySelector('#output-format')
         };
 
-        function normalizeJsonInput(input) {
+        function isJsonLike(input) {
+            return /^[\w{}[\],=.\s:+-]+$/.test(input) && input.includes('=');
+        }
+
+        function jsonLikeToJson(input) {
+            let corrected = input
+                .replace(/(\w+)=/g, '"$1": ') 
+                .replace(/([{\[,])\s*([\d.Ee+-]+)\s*([}\],])/g, '$1"$2"$3')
+                .replace(/"(\d+\.\d+|true|false)"/g, '$1')
+                .replace(/"\s*([{\[])/g, '$1')
+                .replace(/([}\]])\s*"/g, '$1');
+
             try {
-                if (typeof input === "object") {
-                    return input; // Se já for um objeto JS, retorna direto
-                }
-                return JSON.parse(input); // Se for string JSON válida, parseia
-            } catch {
-                throw new Error("O JSON fornecido não é válido.");
+                return JSON.stringify(JSON.parse(corrected), null, 2);
+            } catch (error) {
+                throw new Error("Erro ao converter JSON-like para JSON.");
             }
         }
 
         const conversionFunctions = {
             'json': {
-                'json': (input) => JSON.stringify(normalizeJsonInput(input), null, 2),
-                'xml': (input) => jsonToXml(normalizeJsonInput(input)),
-                'yaml': (input) => jsonToYaml(normalizeJsonInput(input)),
-            },
-            'json-like': { // Trata como JSON
-                'json': (input) => JSON.stringify(normalizeJsonInput(input), null, 2),
-                'xml': (input) => jsonToXml(normalizeJsonInput(input)),
-                'yaml': (input) => jsonToYaml(normalizeJsonInput(input)),
+                'json': (input) => {
+                    if (isJsonLike(input)) {
+                        return jsonLikeToJson(input);
+                    }
+                    return JSON.stringify(JSON.parse(input), null, 2);
+                },
+                'xml': (input) => jsonToXml(input),
+                'yaml': (input) => jsonToYaml(input),
             },
             'xml': {
                 'json': (input) => xmlToJson(input),
-                'json-like': (input) => xmlToJson(input), // Trata XML -> JSON-like da mesma forma
                 'xml': (input) => formatXml(input),
                 'yaml': (input) => jsonToYaml(xmlToJson(input)),
             },
             'yaml': {
                 'json': (input) => yamlToJson(input),
-                'json-like': (input) => yamlToJson(input), // Trata YAML -> JSON-like da mesma forma
                 'xml': (input) => jsonToXml(yamlToJson(input)),
                 'yaml': (input) => formatYaml(input),
             }
@@ -120,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function jsonToXml(json) {
             try {
-                const jsonObj = normalizeJsonInput(json);
+                const jsonObj = JSON.parse(json);
                 return formatXml(x2js.json2xml_str(jsonObj));
             } catch (error) {
                 throw new Error("Erro ao converter JSON para XML: " + error.message);
@@ -129,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function jsonToYaml(json) {
             try {
-                const jsonObj = normalizeJsonInput(json);
+                const jsonObj = JSON.parse(json);
                 return jsyaml.dump(jsonObj);
             } catch (error) {
                 throw new Error("Erro ao converter JSON para YAML: " + error.message);
