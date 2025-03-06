@@ -14,19 +14,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function jsonLikeToJson(input) {
-            let corrected = input
-                .replace(/(\w+)=/g, '"$1": ') 
-                .replace(/([{\[,])\s*([\d.Ee+-]+)\s*([}\],])/g, '$1"$2"$3')
-                .replace(/"(\d+\.\d+|true|false)"/g, '$1')
-                .replace(/"\s*([{\[])/g, '$1')
-                .replace(/([}\]])\s*"/g, '$1');
+    // Substitui "=" por ":" apenas quando necessário e adiciona aspas corretas
+    let corrected = input
+        .replace(/(\w+)=/g, '"$1":') // Adiciona aspas às chaves
+        .replace(/([{,]\s*)(\w+)(\s*:)/g, '$1"$2"$3') // Garante que todas as chaves tenham aspas
+        .replace(/([{,]\s*)'([^']+)'(\s*:)/g, '$1"$2"$3') // Converte chaves com aspas simples para duplas
+        .replace(/([{,]\s*)'([^']+)'(\s*[}\],])/g, '$1"$2"$3') // Converte strings com aspas simples para duplas
+        .replace(/([{,]\s*)(\d+\.\d+E[\d+-]+)(\s*[}\],])/gi, '$1"$2"$3') // Trata números científicos corretamente
+        .replace(/([{,]\s*)(true|false|null)(\s*[}\],])/gi, '$1"$2"$3') // Garante que booleanos e null fiquem corretos
+        .replace(/([{,]\s*)(\d+)(\s*[}\],])/g, '$1$2$3') // Mantém números sem aspas
 
-            try {
-                return JSON.stringify(JSON.parse(corrected), null, 2);
-            } catch (error) {
-                throw new Error("Erro ao converter JSON-like para JSON.");
-            }
-        }
+    try {
+        return JSON.stringify(JSON.parse(corrected), null, 2); // Converte e formata JSON
+    } catch (error) {
+        console.error("Erro ao converter JSON-like para JSON:", error);
+        return "Erro ao converter JSON-like para JSON.";
+    }
+}
+
 
         const conversionFunctions = {
             'json': {
