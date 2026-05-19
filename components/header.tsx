@@ -12,6 +12,11 @@ import {
   Ruler,
   Github,
   Home,
+  Link as LinkIcon,
+  GitCompare,
+  Braces,
+  Shuffle,
+  Regex,
 } from "lucide-react";
 
 const navItems = [
@@ -20,6 +25,11 @@ const navItems = [
   { href: "/binario", label: "Binário", icon: Binary },
   { href: "/hash", label: "Hash", icon: Hash },
   { href: "/converter", label: "JSON/XML/YAML", icon: ArrowLeftRight },
+  { href: "/url", label: "URL", icon: LinkIcon },
+  { href: "/formatador", label: "Formatador", icon: Braces },
+  { href: "/regex", label: "Regex", icon: Regex },
+  { href: "/gerador", label: "Gerador", icon: Shuffle },
+  { href: "/diff", label: "Diff", icon: GitCompare },
   { href: "/unidades", label: "Unidades", icon: Ruler },
   { href: "/tempo", label: "Tempo", icon: Clock },
 ];
