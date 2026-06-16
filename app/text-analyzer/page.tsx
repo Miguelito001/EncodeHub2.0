@@ -5,6 +5,8 @@ import { Header } from "@/components/header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Type, Eye, EyeOff } from "lucide-react";
 
 function analyze(text: string) {

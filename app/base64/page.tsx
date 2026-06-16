@@ -5,10 +5,12 @@ import { Header } from "@/components/header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { ArrowRight, ArrowLeft, Copy, Trash2, Check } from "lucide-react";
 
 export default function Base64Page() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useUrlState("q", "");
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -47,13 +49,16 @@ export default function Base64Page() {
 
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">
-              Conversor Base64
-            </h1>
-            <p className="text-muted-foreground">
-              Codifique e decodifique texto em Base64
-            </p>
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2">
+                Conversor Base64
+              </h1>
+              <p className="text-muted-foreground">
+                Codifique e decodifique texto em Base64
+              </p>
+            </div>
+            <ShareButton />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">

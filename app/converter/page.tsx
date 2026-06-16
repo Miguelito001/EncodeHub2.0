@@ -5,13 +5,15 @@ import { Header } from "@/components/header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Copy, Check, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Format = "json" | "xml" | "yaml";
 
 export default function ConverterPage() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useUrlState("q", "");
   const [output, setOutput] = useState("");
   const [inputFormat, setInputFormat] = useState<Format>("json");
   const [outputFormat, setOutputFormat] = useState<Format>("yaml");
@@ -174,13 +176,16 @@ export default function ConverterPage() {
 
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">
-              Conversor de Dados
-            </h1>
-            <p className="text-muted-foreground">
-              Converta entre JSON, XML e YAML
-            </p>
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2">
+                Conversor de Dados
+              </h1>
+              <p className="text-muted-foreground">
+                Converta entre JSON, XML e YAML
+              </p>
+            </div>
+            <ShareButton />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
