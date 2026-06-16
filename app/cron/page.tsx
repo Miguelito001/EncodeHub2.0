@@ -6,6 +6,8 @@ import "cronstrue/locales/pt_BR";
 import { Header } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Copy, Check, CalendarClock, AlertTriangle } from "lucide-react";
 
 const examples = [
@@ -28,7 +30,7 @@ const fields = [
 ];
 
 export default function CronPage() {
-  const [expr, setExpr] = useState("0 22 * * 1-5");
+  const [expr, setExpr] = useUrlState("q", "0 22 * * 1-5");
   const [copied, setCopied] = useState(false);
 
   const result = useMemo(() => {
@@ -54,16 +56,19 @@ export default function CronPage() {
       <Header />
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <CalendarClock className="h-5 w-5 text-emerald-400" />
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                  <CalendarClock className="h-5 w-5 text-emerald-400" />
+                </div>
+                <h1 className="text-3xl font-bold text-foreground">Tradutor de Cron</h1>
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Tradutor de Cron</h1>
+              <p className="text-muted-foreground">
+                Digite uma expressão Cron e veja a explicação em português — sem precisar decorar a sintaxe.
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Digite uma expressão Cron e veja a explicação em português — sem precisar decorar a sintaxe.
-            </p>
+            <ShareButton />
           </div>
 
           <Card className="mb-6">

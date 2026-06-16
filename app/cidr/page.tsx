@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import { Header } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Copy, Check, Network } from "lucide-react";
 
 function ipToInt(ip: string): number {
@@ -52,7 +54,7 @@ function calc(cidr: string) {
 }
 
 export default function CidrPage() {
-  const [input, setInput] = useState("192.168.1.0/24");
+  const [input, setInput] = useUrlState("q", "192.168.1.0/24");
   const [copied, setCopied] = useState<string | null>(null);
 
   const result = useMemo(() => {
@@ -88,16 +90,19 @@ export default function CidrPage() {
       <Header />
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-md mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <Network className="h-5 w-5 text-blue-400" />
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                  <Network className="h-5 w-5 text-blue-400" />
+                </div>
+                <h1 className="text-3xl font-bold text-foreground">Calculadora CIDR</h1>
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Calculadora CIDR</h1>
+              <p className="text-muted-foreground">
+                Calcule range de IPs, máscara e número de hosts a partir da notação CIDR.
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Calcule range de IPs, máscara e número de hosts a partir da notação CIDR.
-            </p>
+            <ShareButton />
           </div>
 
           <Card className="mb-6">
