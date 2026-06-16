@@ -61,7 +61,7 @@ function revealInvisibles(text: string) {
 }
 
 export default function TextAnalyzerPage() {
-  const [text, setText] = useState("");
+  const [text, setText] = useUrlState("q", "");
   const [showInvisible, setShowInvisible] = useState(false);
   const stats = useMemo(() => analyze(text), [text]);
 
@@ -86,16 +86,19 @@ export default function TextAnalyzerPage() {
       <Header />
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <Type className="h-5 w-5 text-fuchsia-400" />
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                  <Type className="h-5 w-5 text-fuchsia-400" />
+                </div>
+                <h1 className="text-3xl font-bold text-foreground">Analisador de Texto</h1>
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Analisador de Texto</h1>
+              <p className="text-muted-foreground">
+                Conte caracteres, palavras, bytes e detecte caracteres invisíveis que causam bugs.
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Conte caracteres, palavras, bytes e detecte caracteres invisíveis que causam bugs.
-            </p>
+            <ShareButton />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">

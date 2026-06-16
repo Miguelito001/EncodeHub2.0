@@ -6,6 +6,8 @@ import { Header } from "@/components/header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Copy, Trash2, Check, Database, Wand2, AlertTriangle } from "lucide-react";
 
 const dialects = [
@@ -18,7 +20,7 @@ const dialects = [
 ] as const;
 
 export default function SqlPage() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useUrlState("q", "");
   const [output, setOutput] = useState("");
   const [dialect, setDialect] = useState<(typeof dialects)[number]["value"]>("sql");
   const [keywordCase, setKeywordCase] = useState<"upper" | "lower" | "preserve">("upper");
@@ -57,16 +59,19 @@ export default function SqlPage() {
       <Header />
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <Database className="h-5 w-5 text-sky-400" />
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                  <Database className="h-5 w-5 text-sky-400" />
+                </div>
+                <h1 className="text-3xl font-bold text-foreground">Formatador de SQL</h1>
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Formatador de SQL</h1>
+              <p className="text-muted-foreground">
+                Cole queries SQL desorganizadas e embeleze-as com indentação e palavras-chave padronizadas.
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Cole queries SQL desorganizadas e embeleze-as com indentação e palavras-chave padronizadas.
-            </p>
+            <ShareButton />
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-4">

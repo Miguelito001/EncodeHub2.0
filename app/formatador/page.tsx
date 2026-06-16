@@ -5,6 +5,8 @@ import { Header } from "@/components/header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Copy, Trash2, Check, Braces, Minimize2, Maximize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -79,7 +81,7 @@ const TABS: { id: Language; label: string }[] = [
 
 export default function FormatadorPage() {
   const [lang, setLang] = useState<Language>("json");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useUrlState("q", "");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
@@ -126,16 +128,19 @@ export default function FormatadorPage() {
 
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <Braces className="h-5 w-5 text-orange-400" />
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                  <Braces className="h-5 w-5 text-orange-400" />
+                </div>
+                <h1 className="text-3xl font-bold text-foreground">Formatador de Código</h1>
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Formatador de Código</h1>
+              <p className="text-muted-foreground">
+                Formate ou minifique JSON, CSS e HTML com um clique
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Formate ou minifique JSON, CSS e HTML com um clique
-            </p>
+            <ShareButton />
           </div>
 
           {/* Language Tabs */}

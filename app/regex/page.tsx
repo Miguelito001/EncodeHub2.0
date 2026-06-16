@@ -5,6 +5,8 @@ import { Header } from "@/components/header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/share-button";
+import { useUrlState } from "@/hooks/use-url-state";
 import { Copy, Check, Regex } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -56,7 +58,7 @@ function highlightText(text: string, matches: Match[]): React.ReactNode[] {
 }
 
 export default function RegexPage() {
-  const [pattern, setPattern] = useState("");
+  const [pattern, setPattern] = useUrlState("q", "");
   const [activeFlags, setActiveFlags] = useState<Set<string>>(new Set(["g"]));
   const [testText, setTestText] = useState(
     "Contato: joao@email.com ou maria@empresa.com.br\nCPF: 123.456.789-00\nSite: https://www.exemplo.com.br"
@@ -109,16 +111,19 @@ export default function RegexPage() {
 
       <main className="flex-1 p-4 md:p-8">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <Regex className="h-5 w-5 text-cyan-400" />
+          <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                  <Regex className="h-5 w-5 text-cyan-400" />
+                </div>
+                <h1 className="text-3xl font-bold text-foreground">Regex Tester</h1>
               </div>
-              <h1 className="text-3xl font-bold text-foreground">Regex Tester</h1>
+              <p className="text-muted-foreground">
+                Teste expressões regulares com destaque de correspondências em tempo real
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Teste expressões regulares com destaque de correspondências em tempo real
-            </p>
+            <ShareButton />
           </div>
 
           {/* Pattern Input */}
